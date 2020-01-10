@@ -2,10 +2,12 @@
 # Please keep this list sorted alphabetically.
 ar
 ca
+ca@valencia
 cs
 da
 de
 el
+eo
 es
 fa
 fi
@@ -21,9 +23,12 @@ ja
 ko
 lt
 lv
+ml
 nb
+ne
 nl
 oc
+pa
 pl
 pt_BR
 pt
@@ -35,4 +40,5 @@ sr
 sv
 tr
 vi
+zh_CN
 zh_TW

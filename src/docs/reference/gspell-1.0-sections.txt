@@ -2,7 +2,6 @@
 
 <SECTION>
 <FILE>checker</FILE>
-<TITLE>GspellChecker</TITLE>
 GspellChecker
 GspellCheckerError
 GSPELL_CHECKER_ERROR
@@ -15,6 +14,7 @@ gspell_checker_add_word_to_personal
 gspell_checker_add_word_to_session
 gspell_checker_clear_session
 gspell_checker_set_correction
+gspell_checker_get_enchant_dict
 <SUBSECTION Standard>
 GspellCheckerClass
 GSPELL_TYPE_CHECKER
@@ -25,7 +25,6 @@ gspell_checker_error_get_type
 
 <SECTION>
 <FILE>language</FILE>
-<TITLE>GspellLanguage</TITLE>
 GspellLanguage
 gspell_language_get_available
 gspell_language_get_default
@@ -42,7 +41,6 @@ gspell_language_get_type
 
 <SECTION>
 <FILE>text-buffer</FILE>
-<TITLE>GspellTextBuffer</TITLE>
 GspellTextBuffer
 gspell_text_buffer_get_from_gtk_text_buffer
 gspell_text_buffer_get_buffer
@@ -54,7 +52,6 @@ GSPELL_TYPE_TEXT_BUFFER
 
 <SECTION>
 <FILE>text-view</FILE>
-<TITLE>GspellTextView</TITLE>
 GspellTextView
 gspell_text_view_get_from_gtk_text_view
 gspell_text_view_basic_setup
@@ -70,17 +67,16 @@ GspellTextViewClass
 
 <SECTION>
 <FILE>checker-dialog</FILE>
-<TITLE>GspellCheckerDialog</TITLE>
 GspellCheckerDialog
 gspell_checker_dialog_new
 gspell_checker_dialog_get_spell_navigator
 <SUBSECTION Standard>
+GspellCheckerDialogClass
 GSPELL_TYPE_CHECKER_DIALOG
 </SECTION>
 
 <SECTION>
 <FILE>navigator</FILE>
-<TITLE>GspellNavigator</TITLE>
 GspellNavigator
 gspell_navigator_goto_next
 gspell_navigator_change
@@ -92,7 +88,6 @@ GSPELL_TYPE_NAVIGATOR
 
 <SECTION>
 <FILE>navigator-text-view</FILE>
-<TITLE>GspellNavigatorTextView</TITLE>
 GspellNavigatorTextView
 gspell_navigator_text_view_new
 gspell_navigator_text_view_get_view
@@ -103,7 +98,6 @@ GspellNavigatorTextViewClass
 
 <SECTION>
 <FILE>language-chooser</FILE>
-<TITLE>GspellLanguageChooser</TITLE>
 GspellLanguageChooser
 gspell_language_chooser_get_language
 gspell_language_chooser_set_language
@@ -116,7 +110,6 @@ GspellLanguageChooserInterface
 
 <SECTION>
 <FILE>language-chooser-button</FILE>
-<TITLE>GspellLanguageChooserButton</TITLE>
 GspellLanguageChooserButton
 gspell_language_chooser_button_new
 <SUBSECTION Standard>
@@ -126,9 +119,32 @@ GspellLanguageChooserButtonClass
 
 <SECTION>
 <FILE>language-chooser-dialog</FILE>
-<TITLE>GspellLanguageChooserDialog</TITLE>
 GspellLanguageChooserDialog
 gspell_language_chooser_dialog_new
 <SUBSECTION Standard>
+GspellLanguageChooserDialogClass
 GSPELL_TYPE_LANGUAGE_CHOOSER_DIALOG
+</SECTION>
+
+<SECTION>
+<FILE>entry-buffer</FILE>
+GspellEntryBuffer
+gspell_entry_buffer_get_from_gtk_entry_buffer
+gspell_entry_buffer_get_buffer
+gspell_entry_buffer_get_spell_checker
+gspell_entry_buffer_set_spell_checker
+<SUBSECTION Standard>
+GSPELL_TYPE_ENTRY_BUFFER
+</SECTION>
+
+<SECTION>
+<FILE>entry</FILE>
+GspellEntry
+gspell_entry_get_from_gtk_entry
+gspell_entry_basic_setup
+gspell_entry_get_entry
+gspell_entry_get_inline_spell_checking
+gspell_entry_set_inline_spell_checking
+<SUBSECTION Standard>
+GSPELL_TYPE_ENTRY
 </SECTION>

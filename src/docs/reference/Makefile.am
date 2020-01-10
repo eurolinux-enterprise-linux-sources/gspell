@@ -31,11 +31,17 @@ EXTRA_HFILES =						\
 IGNORE_HFILES =					\
 	gspell.h				\
 	gspellregion.h				\
+	gspell-checker-private.h		\
+	gspell-context-menu.h			\
+	gspell-current-word-policy.h		\
+	gspell-entry-private.h			\
+	gspell-entry-utils.h			\
 	gspell-init.h				\
 	gspell-inline-checker-text-buffer.h	\
 	gspell-osx.h				\
 	gspell-text-iter.h			\
-	gspell-utils.h
+	gspell-utils.h				\
+	gspell-version.h
 
 # Extra options to supply to gtkdoc-mkdb
 MKDB_OPTIONS = --xml-mode --output-format=xml

@@ -17,13 +17,17 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "gspell-text-iter.h"
 #include "gspell-utils.h"
 
 /* The same functions as the gtk_text_iter_* equivalents, but take into account:
  * - Word contractions with an apostrophe. For example "doesn't", which is a
  *   contraction of the two words "does not".
- * - Componds with words separated by dashes. For example "spell-checking".
+ * - Compounds with words separated by dashes. For example "spell-checking".
  *
  * When to include an apostrophe or a dash in a word? The heuristic is that the
  * apostrophe must be surrounded by a pango-defined word on *each* side of the
@@ -40,9 +44,12 @@
  * the apostrophe. The implementation would be slightly more complicated, since
  * a function behavior depends on the other side of the word.
  *
- * If the following Pango bug is fixed, the gtk_text_iter_* functions can maybe
- * be used directly.
- * FIXME: https://bugzilla.gnome.org/show_bug.cgi?id=97545
+ * When doing changes to the algo here, it should be reflected for the GtkEntry
+ * support as well, to have a consistent behavior.
+ *
+ * TODO: the following Pango bug is now mostly done, see if the gtk_text_iter_*
+ * functions can be used directly, or if the code here can be simplified.
+ * https://bugzilla.gnome.org/show_bug.cgi?id=97545
  * "Make pango_default_break follow Unicode TR #29"
  */
 
@@ -53,10 +60,7 @@ is_apostrophe_or_dash (const GtkTextIter *iter)
 
 	ch = gtk_text_iter_get_char (iter);
 
-	return (ch == '-' ||
-		ch == '\'' ||
-		ch == _GSPELL_MODIFIER_LETTER_APOSTROPHE ||
-		ch == _GSPELL_RIGHT_SINGLE_QUOTATION_MARK);
+	return _gspell_utils_is_apostrophe_or_dash (ch);
 }
 
 gboolean

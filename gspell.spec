@@ -2,13 +2,13 @@
 %global gtk3_version 3.20
 
 Name:           gspell
-Version:        1.2.3
+Version:        1.6.1
 Release:        1%{?dist}
 Summary:        Spell-checking library for GTK+
 
 License:        LGPLv2+
 URL:            https://wiki.gnome.org/Projects/gspell
-Source0:        https://download.gnome.org/sources/%{name}/1.2/%{name}-%{version}.tar.xz
+Source0:        https://download.gnome.org/sources/%{name}/1.6/%{name}-%{version}.tar.xz
 
 BuildRequires:  gettext
 BuildRequires:  gobject-introspection-devel
@@ -72,6 +72,7 @@ find $RPM_BUILD_ROOT -name '*.la' -delete
 %{_libdir}/libgspell-1.so.1*
 
 %files devel
+%{_bindir}/gspell-app1
 %{_includedir}/gspell-1/
 %{_libdir}/libgspell-1.so
 %{_libdir}/pkgconfig/gspell-1.pc
@@ -83,6 +84,10 @@ find $RPM_BUILD_ROOT -name '*.la' -delete
 
 
 %changelog
+* Wed Nov 01 2017 Kalev Lember <klember@redhat.com> - 1.6.1-1
+- Update to 1.6.1
+- Resolves: #1569277
+
 * Fri Feb 24 2017 Kalev Lember <klember@redhat.com> - 1.2.3-1
 - Update to 1.2.3
 - Resolves: #1388481

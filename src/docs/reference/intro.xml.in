@@ -7,7 +7,7 @@
  %gtkdocentities;
 ]>
 
-<part>
+<part id="intro">
   <title>Introduction</title>
 
   <para>
@@ -35,6 +35,15 @@
       See the <link linkend="gspell-text-view-basic-setup"><function>gspell_text_view_basic_setup()</function></link>
       convenience function to quickly enable inline spell checking in a
       <link linkend="GtkTextView"><type>GtkTextView</type></link> widget.
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>How to enable inline spell checking in a GtkEntry</title>
+    <para>
+      See the <link linkend="gspell-entry-basic-setup"><function>gspell_entry_basic_setup()</function></link>
+      convenience function to quickly enable inline spell checking in a
+      <link linkend="GtkEntry"><type>GtkEntry</type></link> widget.
     </para>
   </refsect1>
 </part>

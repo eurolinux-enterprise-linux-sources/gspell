@@ -17,6 +17,8 @@ gspell_public_headers =				\
 	gspell.h				\
 	gspell-checker.h			\
 	gspell-checker-dialog.h			\
+	gspell-entry.h				\
+	gspell-entry-buffer.h			\
 	gspell-language.h			\
 	gspell-language-chooser.h		\
 	gspell-language-chooser-button.h	\
@@ -24,11 +26,14 @@ gspell_public_headers =				\
 	gspell-navigator.h			\
 	gspell-navigator-text-view.h		\
 	gspell-text-buffer.h			\
-	gspell-text-view.h
+	gspell-text-view.h			\
+	gspell-version.h
 
 gspell_public_c_files =				\
 	gspell-checker.c			\
 	gspell-checker-dialog.c			\
+	gspell-entry.c				\
+	gspell-entry-buffer.c			\
 	gspell-language.c			\
 	gspell-language-chooser.c		\
 	gspell-language-chooser-button.c	\
@@ -41,6 +46,11 @@ gspell_public_c_files =				\
 gspell_private_headers =			\
 	gconstructor.h				\
 	gspellregion.h				\
+	gspell-checker-private.h		\
+	gspell-context-menu.h			\
+	gspell-current-word-policy.h		\
+	gspell-entry-private.h			\
+	gspell-entry-utils.h			\
 	gspell-init.h				\
 	gspell-inline-checker-text-buffer.h	\
 	gspell-text-iter.h			\
@@ -48,6 +58,9 @@ gspell_private_headers =			\
 
 gspell_private_c_files =			\
 	gspellregion.c				\
+	gspell-context-menu.c			\
+	gspell-current-word-policy.c		\
+	gspell-entry-utils.c			\
 	gspell-init.c				\
 	gspell-inline-checker-text-buffer.c	\
 	gspell-text-iter.c			\
@@ -78,13 +91,16 @@ libgspell_core_la_SOURCES =		\
 nodist_libgspell_core_la_SOURCES = \
 	$(BUILT_SOURCES)
 
-libgspell_core_la_CFLAGS = \
+libgspell_core_la_LIBADD =	\
+	$(CODE_COVERAGE_LIBS)
+
+libgspell_core_la_CFLAGS =			\
+	$(GSPELL_HIDDEN_VISIBILITY_CFLAGS)	\
 	$(CODE_COVERAGE_CFLAGS)
 
-libgspell_core_la_LDFLAGS =		\
-	-no-undefined			\
-	$(WARN_LDFLAGS)			\
-	$(CODE_COVERAGE_LDFLAGS)
+libgspell_core_la_LDFLAGS =	\
+	-no-undefined		\
+	$(WARN_LDFLAGS)
 
 # The real library.
 lib_LTLIBRARIES = libgspell-@GSPELL_API_VERSION@.la
@@ -94,17 +110,18 @@ libgspell_@GSPELL_API_VERSION@_la_SOURCES =
 libgspell_@GSPELL_API_VERSION@_la_LIBADD =	\
 	libgspell-core.la			\
 	$(DEP_LIBS)				\
-	$(GTK_MAC_LIBS)
+	$(GTK_MAC_LIBS)				\
+	$(CODE_COVERAGE_LIBS)
 
 libgspell_@GSPELL_API_VERSION@_la_CFLAGS =	\
+	$(GSPELL_HIDDEN_VISIBILITY_CFLAGS)	\
 	$(CODE_COVERAGE_CFLAGS)
 
 libgspell_@GSPELL_API_VERSION@_la_LDFLAGS =	\
 	-version-info $(GSPELL_LT_VERSION)	\
 	-no-undefined				\
-	-export-symbols-regex "^gspell_.*"	\
-	$(WARN_LDFLAGS)				\
-	$(CODE_COVERAGE_LDFLAGS)
+	-export-dynamic				\
+	$(WARN_LDFLAGS)
 
 libgspell_includedir = $(includedir)/gspell-@GSPELL_API_VERSION@/gspell
 libgspell_include_HEADERS = $(gspell_public_headers)

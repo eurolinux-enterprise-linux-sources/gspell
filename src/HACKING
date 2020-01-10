@@ -1,0 +1,10 @@
+How to contribute to gspell
+===========================
+
+gspell follows the same guidelines and code conventions as GtkSourceView:
+
+    https://git.gnome.org/browse/gtksourceview/tree/HACKING
+
+The bugzilla product of gspell is available at:
+
+    https://bugzilla.gnome.org/page.cgi?id=browse.html&product=gspell

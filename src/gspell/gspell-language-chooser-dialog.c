@@ -18,6 +18,10 @@
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include "gspell-language-chooser-dialog.h"
 #include "gspell-language-chooser.h"
 

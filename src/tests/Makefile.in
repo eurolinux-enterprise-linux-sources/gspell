@@ -122,23 +122,30 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__EXEEXT_1 = test-spell$(EXEEXT) test-spell-basic$(EXEEXT)
+am__EXEEXT_1 = test-entry$(EXEEXT) test-text-view$(EXEEXT) \
+	test-text-view-basic$(EXEEXT)
 PROGRAMS = $(noinst_PROGRAMS)
-am_test_spell_OBJECTS = test-spell.$(OBJEXT)
-test_spell_OBJECTS = $(am_test_spell_OBJECTS)
-test_spell_LDADD = $(LDADD)
+am_test_entry_OBJECTS = test-entry.$(OBJEXT)
+test_entry_OBJECTS = $(am_test_entry_OBJECTS)
+test_entry_LDADD = $(LDADD)
 am__DEPENDENCIES_1 =
-test_spell_DEPENDENCIES =  \
+test_entry_DEPENDENCIES =  \
 	$(top_builddir)/gspell/libgspell-@GSPELL_API_VERSION@.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-am_test_spell_basic_OBJECTS = test-spell-basic.$(OBJEXT)
-test_spell_basic_OBJECTS = $(am_test_spell_basic_OBJECTS)
-test_spell_basic_LDADD = $(LDADD)
-test_spell_basic_DEPENDENCIES =  \
+am_test_text_view_OBJECTS = test-text-view.$(OBJEXT)
+test_text_view_OBJECTS = $(am_test_text_view_OBJECTS)
+test_text_view_LDADD = $(LDADD)
+test_text_view_DEPENDENCIES =  \
+	$(top_builddir)/gspell/libgspell-@GSPELL_API_VERSION@.la \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+am_test_text_view_basic_OBJECTS = test-text-view-basic.$(OBJEXT)
+test_text_view_basic_OBJECTS = $(am_test_text_view_basic_OBJECTS)
+test_text_view_basic_LDADD = $(LDADD)
+test_text_view_basic_DEPENDENCIES =  \
 	$(top_builddir)/gspell/libgspell-@GSPELL_API_VERSION@.la \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -175,13 +182,19 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(test_spell_SOURCES) $(test_spell_basic_SOURCES)
-DIST_SOURCES = $(test_spell_SOURCES) $(test_spell_basic_SOURCES)
+SOURCES = $(test_entry_SOURCES) $(test_text_view_SOURCES) \
+	$(test_text_view_basic_SOURCES)
+DIST_SOURCES = $(test_entry_SOURCES) $(test_text_view_SOURCES) \
+	$(test_text_view_basic_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
+am__extra_recursive_targets = check-valgrind-recursive \
+	check-valgrind-memcheck-recursive \
+	check-valgrind-helgrind-recursive check-valgrind-drd-recursive \
+	check-valgrind-sgcheck-recursive
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -252,6 +265,7 @@ GMSGFMT = @GMSGFMT@
 GMSGFMT_015 = @GMSGFMT_015@
 GREP = @GREP@
 GSPELL_API_VERSION = @GSPELL_API_VERSION@
+GSPELL_HIDDEN_VISIBILITY_CFLAGS = @GSPELL_HIDDEN_VISIBILITY_CFLAGS@
 GSPELL_LT_VERSION = @GSPELL_LT_VERSION@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_CHECK_PATH = @GTKDOC_CHECK_PATH@
@@ -403,9 +417,10 @@ LDADD = $(top_builddir)/gspell/libgspell-@GSPELL_API_VERSION@.la	\
 	$(DEP_LIBS)							\
 	$(GTK_MAC_LIBS)
 
-TEST_PROGS = test-spell test-spell-basic
-test_spell_SOURCES = test-spell.c
-test_spell_basic_SOURCES = test-spell-basic.c
+TEST_PROGS = test-entry test-text-view test-text-view-basic
+test_entry_SOURCES = test-entry.c
+test_text_view_SOURCES = test-text-view.c
+test_text_view_basic_SOURCES = test-text-view-basic.c
 all: all-am
 
 .SUFFIXES:
@@ -449,13 +464,17 @@ clean-noinstPROGRAMS:
 	echo " rm -f" $$list; \
 	rm -f $$list
 
-test-spell$(EXEEXT): $(test_spell_OBJECTS) $(test_spell_DEPENDENCIES) $(EXTRA_test_spell_DEPENDENCIES) 
-	@rm -f test-spell$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_spell_OBJECTS) $(test_spell_LDADD) $(LIBS)
+test-entry$(EXEEXT): $(test_entry_OBJECTS) $(test_entry_DEPENDENCIES) $(EXTRA_test_entry_DEPENDENCIES) 
+	@rm -f test-entry$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_entry_OBJECTS) $(test_entry_LDADD) $(LIBS)
 
-test-spell-basic$(EXEEXT): $(test_spell_basic_OBJECTS) $(test_spell_basic_DEPENDENCIES) $(EXTRA_test_spell_basic_DEPENDENCIES) 
-	@rm -f test-spell-basic$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(test_spell_basic_OBJECTS) $(test_spell_basic_LDADD) $(LIBS)
+test-text-view$(EXEEXT): $(test_text_view_OBJECTS) $(test_text_view_DEPENDENCIES) $(EXTRA_test_text_view_DEPENDENCIES) 
+	@rm -f test-text-view$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_text_view_OBJECTS) $(test_text_view_LDADD) $(LIBS)
+
+test-text-view-basic$(EXEEXT): $(test_text_view_basic_OBJECTS) $(test_text_view_basic_DEPENDENCIES) $(EXTRA_test_text_view_basic_DEPENDENCIES) 
+	@rm -f test-text-view-basic$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_text_view_basic_OBJECTS) $(test_text_view_basic_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -463,8 +482,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-spell-basic.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-spell.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-entry.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-text-view-basic.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-text-view.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -492,6 +512,11 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+check-valgrind-local: 
+check-valgrind-memcheck-local: 
+check-valgrind-helgrind-local: 
+check-valgrind-drd-local: 
+check-valgrind-sgcheck-local: 
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -609,6 +634,26 @@ distclean-generic:
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+check-valgrind: check-valgrind-am
+
+check-valgrind-am: check-valgrind-local
+
+check-valgrind-drd: check-valgrind-drd-am
+
+check-valgrind-drd-am: check-valgrind-drd-local
+
+check-valgrind-helgrind: check-valgrind-helgrind-am
+
+check-valgrind-helgrind-am: check-valgrind-helgrind-local
+
+check-valgrind-memcheck: check-valgrind-memcheck-am
+
+check-valgrind-memcheck-am: check-valgrind-memcheck-local
+
+check-valgrind-sgcheck: check-valgrind-sgcheck-am
+
+check-valgrind-sgcheck-am: check-valgrind-sgcheck-local
+
 clean: clean-am
 
 clean-am: clean-generic clean-libtool clean-noinstPROGRAMS \
@@ -682,19 +727,23 @@ uninstall-am:
 
 .MAKE: install-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
-	clean-libtool clean-noinstPROGRAMS cscopelist-am ctags \
-	ctags-am distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am
+.PHONY: CTAGS GTAGS TAGS all all-am check check-am check-valgrind-am \
+	check-valgrind-drd-am check-valgrind-drd-local \
+	check-valgrind-helgrind-am check-valgrind-helgrind-local \
+	check-valgrind-local check-valgrind-memcheck-am \
+	check-valgrind-memcheck-local check-valgrind-sgcheck-am \
+	check-valgrind-sgcheck-local clean clean-generic clean-libtool \
+	clean-noinstPROGRAMS cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-libtool \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
+	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile
 

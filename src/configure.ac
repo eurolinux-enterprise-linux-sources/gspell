@@ -3,7 +3,7 @@ dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.64)
 
 # Package version of the form 'major.minor.micro'.
-m4_define(gspell_package_version, 1.2.3)
+m4_define(gspell_package_version, 1.6.1)
 
 AC_INIT([gspell],
 	[gspell_package_version],
@@ -34,9 +34,9 @@ AX_IS_RELEASE([git-directory])
 # When incrementing the API version (usually for a new major package version),
 # set CURRENT, REVISION and AGE to 0 since it's like a new library.
 
-GSPELL_LT_CURRENT=2
+GSPELL_LT_CURRENT=4
 GSPELL_LT_REVISION=0
-GSPELL_LT_AGE=1
+GSPELL_LT_AGE=3
 GSPELL_LT_VERSION="$GSPELL_LT_CURRENT:$GSPELL_LT_REVISION:$GSPELL_LT_AGE"
 AC_SUBST(GSPELL_LT_VERSION)
 
@@ -73,6 +73,7 @@ PKG_PROG_PKG_CONFIG
 PKG_INSTALLDIR
 
 AC_PATH_PROG([GLIB_MKENUMS], [glib-mkenums])
+AC_PATH_PROG([GLIB_COMPILE_RESOURCES], [glib-compile-resources])
 
 # Needed on Mac OS X
 AC_PROG_OBJC
@@ -81,18 +82,16 @@ AC_PROG_OBJC
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static])
 
-# Pull GLib utility
-AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
-
-# Compile warnings
+# Compile warnings. There can be deprecation warnings at any time, so disable
+# -Werror by default with the [yes] argument.
 AX_REQUIRE_DEFINED([AX_COMPILER_FLAGS])
-AX_COMPILER_FLAGS([WARN_CFLAGS], [WARN_LDFLAGS])
+AX_COMPILER_FLAGS([WARN_CFLAGS], [WARN_LDFLAGS], [yes])
 
 # Dynamic linking dependencies
 AX_REQUIRE_DEFINED([AX_PKG_CHECK_MODULES])
 AX_PKG_CHECK_MODULES([DEP],
-		     [glib-2.0 >= $glib_req  gtk+-3.0 >= $gtk_req],
-		     [enchant >= $enchant_req])
+		     [glib-2.0 >= $glib_req  gtk+-3.0 >= $gtk_req  enchant >= $enchant_req],
+		     [])
 
 # iso-codes
 AX_REQUIRE_DEFINED([PKG_CHECK_EXISTS])
@@ -148,11 +147,45 @@ VAPIGEN_CHECK
 
 # Code coverage for unit tests
 AX_REQUIRE_DEFINED([AX_CODE_COVERAGE])
-AX_CODE_COVERAGE()
+AX_CODE_COVERAGE
 
 # Valgrind check
 AX_REQUIRE_DEFINED([AX_VALGRIND_CHECK])
 AX_VALGRIND_CHECK
+
+# Symbol visibility handling.
+#
+# This requires to #include config.h in every *.c file where there is a public
+# symbol. As a simpler rule, it's easier to #include config.h in all gspell/*.c
+# files, to be sure that we don't miss any public symbol.
+GSPELL_HIDDEN_VISIBILITY_CFLAGS=""
+case "$host" in
+    *-*-mingw*)
+        dnl on mingw32 we do -fvisibility=hidden and __declspec(dllexport)
+        AC_DEFINE([_GSPELL_EXTERN], [__attribute__((visibility("default"))) __declspec(dllexport) extern],
+                  [defines how to decorate public symbols while building])
+        GSPELL_HIDDEN_VISIBILITY_CFLAGS="-fvisibility=hidden"
+        ;;
+    *)
+        dnl on other compilers, check if we can do -fvisibility=hidden
+        SAVED_CFLAGS="${CFLAGS}"
+        CFLAGS="-fvisibility=hidden"
+        AC_MSG_CHECKING([for -fvisibility=hidden compiler flag])
+        AC_TRY_COMPILE([], [int main (void) { return 0; }],
+                       AC_MSG_RESULT(yes)
+                       enable_fvisibility_hidden=yes,
+                       AC_MSG_RESULT(no)
+                       enable_fvisibility_hidden=no)
+        CFLAGS="${SAVED_CFLAGS}"
+
+        AS_IF([test "${enable_fvisibility_hidden}" = "yes"], [
+            AC_DEFINE([_GSPELL_EXTERN], [__attribute__((visibility("default"))) extern],
+                      [defines how to decorate public symbols while building])
+            GSPELL_HIDDEN_VISIBILITY_CFLAGS="-fvisibility=hidden"
+        ])
+        ;;
+esac
+AC_SUBST(GSPELL_HIDDEN_VISIBILITY_CFLAGS)
 
 # Check for Mac OS X platform
 AC_MSG_CHECKING([for Mac OS X platform])
@@ -214,6 +247,7 @@ AC_CONFIG_FILES([
 	docs/reference/Makefile
 	gspell/Makefile
 	gspell/resources/Makefile
+	gspell-app/Makefile
 	po/Makefile.in
 	tests/Makefile
 	testsuite/Makefile
@@ -224,7 +258,10 @@ AC_OUTPUT
 echo "
 Configuration:
 
+	${PACKAGE_NAME} version ${PACKAGE_VERSION}
+
 	Source code location:	${srcdir}
+	Prefix:			${prefix}
 	Compiler:		${CC}
 	Documentation:		${enable_gtk_doc}
 	GObject introspection:	${found_introspection}

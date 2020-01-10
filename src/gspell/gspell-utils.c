@@ -2,7 +2,7 @@
  * This file is part of gspell, a spell-checking library.
  *
  * Copyright 2010 - Jesse van den Kieboom
- * Copyright 2015 - Sébastien Wilmet
+ * Copyright 2015, 2016, 2017 - Sébastien Wilmet
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,6 +17,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
 
 #include "gspell-utils.h"
 #include <string.h>
@@ -191,6 +195,90 @@ _gspell_utils_str_to_ascii_apostrophe (const gchar  *word,
 
 	g_free (word_to_free);
 	return TRUE;
+}
+
+gboolean
+_gspell_utils_is_apostrophe_or_dash (gunichar ch)
+{
+	return (ch == '-' ||
+		ch == '\'' ||
+		ch == _GSPELL_MODIFIER_LETTER_APOSTROPHE ||
+		ch == _GSPELL_RIGHT_SINGLE_QUOTATION_MARK);
+}
+
+/* Not the full intensity for the red, it's more readable with the red a bit
+ * darker for PANGO_UNDERLINE_SINGLE.
+ * For PANGO_UNDERLINE_ERROR, the full red intensity was used.
+ */
+#define UNDERLINE_COLOR_RED_INTENSITY (0.8)
+
+void
+_gspell_utils_init_underline_rgba (GdkRGBA *underline_color)
+{
+	g_return_if_fail (underline_color != NULL);
+
+	underline_color->red = UNDERLINE_COLOR_RED_INTENSITY;
+	underline_color->green = 0.0;
+	underline_color->blue = 0.0;
+	underline_color->alpha = 1.0;
+}
+
+PangoAttribute *
+_gspell_utils_create_pango_attr_underline_color (void)
+{
+	return pango_attr_underline_color_new (65535 * UNDERLINE_COLOR_RED_INTENSITY, 0, 0);
+}
+
+void
+_gspell_utils_improve_word_boundaries (const gchar  *text,
+				       PangoLogAttr *log_attrs,
+				       gint          n_attrs)
+{
+	const gchar *cur_text_pos;
+	gint attr_num;
+
+	attr_num = 0;
+	cur_text_pos = text;
+
+	while (attr_num < n_attrs)
+	{
+		PangoLogAttr *log_attr_before;
+		gunichar ch;
+		PangoLogAttr *log_attr_after;
+
+		if (cur_text_pos == NULL ||
+		    *cur_text_pos == '\0')
+		{
+			if (attr_num != n_attrs - 1)
+			{
+				g_warning ("%s(): problem in loop iteration, attr_num=%d but should be %d.",
+					   G_STRFUNC,
+					   attr_num,
+					   n_attrs - 1);
+			}
+
+			break;
+		}
+
+		g_assert_cmpint (attr_num + 1, <, n_attrs);
+
+		/* ch is between log_attr_before and log_attr_after. */
+		log_attr_before = log_attrs + attr_num;
+		ch = g_utf8_get_char (cur_text_pos);
+		log_attr_after = log_attr_before + 1;
+
+		/* Same algo as in gspell-text-iter.c. */
+		if (_gspell_utils_is_apostrophe_or_dash (ch) &&
+		    log_attr_before->is_word_end &&
+		    log_attr_after->is_word_start)
+		{
+			log_attr_before->is_word_end = FALSE;
+			log_attr_after->is_word_start = FALSE;
+		}
+
+		attr_num++;
+		cur_text_pos = g_utf8_find_next_char (cur_text_pos, NULL);
+	}
 }
 
 /* ex:set ts=8 noet: */

@@ -125,7 +125,7 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__EXEEXT_1 = test-checker$(EXEEXT) \
+am__EXEEXT_1 = test-checker$(EXEEXT) test-entry$(EXEEXT) \
 	test-inline-checker-text-buffer$(EXEEXT) \
 	test-text-iter$(EXEEXT) test-utils$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(insttestdir)" \
@@ -141,6 +141,11 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+am_test_entry_OBJECTS = test-entry.$(OBJEXT)
+test_entry_OBJECTS = $(am_test_entry_OBJECTS)
+test_entry_LDADD = $(LDADD)
+test_entry_DEPENDENCIES = $(top_builddir)/gspell/libgspell-core.la \
+	$(am__DEPENDENCIES_1)
 am_test_inline_checker_text_buffer_OBJECTS =  \
 	test-inline-checker-text-buffer.$(OBJEXT)
 test_inline_checker_text_buffer_OBJECTS =  \
@@ -192,10 +197,10 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(test_checker_SOURCES) \
+SOURCES = $(test_checker_SOURCES) $(test_entry_SOURCES) \
 	$(test_inline_checker_text_buffer_SOURCES) \
 	$(test_text_iter_SOURCES) $(test_utils_SOURCES)
-DIST_SOURCES = $(test_checker_SOURCES) \
+DIST_SOURCES = $(test_checker_SOURCES) $(test_entry_SOURCES) \
 	$(test_inline_checker_text_buffer_SOURCES) \
 	$(test_text_iter_SOURCES) $(test_utils_SOURCES)
 am__can_run_installinfo = \
@@ -231,6 +236,10 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 DATA = $(testmeta_DATA)
+am__extra_recursive_targets = check-valgrind-recursive \
+	check-valgrind-memcheck-recursive \
+	check-valgrind-helgrind-recursive check-valgrind-drd-recursive \
+	check-valgrind-sgcheck-recursive
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -479,6 +488,7 @@ GMSGFMT = @GMSGFMT@
 GMSGFMT_015 = @GMSGFMT_015@
 GREP = @GREP@
 GSPELL_API_VERSION = @GSPELL_API_VERSION@
+GSPELL_HIDDEN_VISIBILITY_CFLAGS = @GSPELL_HIDDEN_VISIBILITY_CFLAGS@
 GSPELL_LT_VERSION = @GSPELL_LT_VERSION@
 GTKDOC_CHECK = @GTKDOC_CHECK@
 GTKDOC_CHECK_PATH = @GTKDOC_CHECK_PATH@
@@ -638,15 +648,16 @@ AM_LDFLAGS = $(WARN_LDFLAGS)
 LDADD = $(top_builddir)/gspell/libgspell-core.la	\
 	$(DEP_LIBS)
 
-UNIT_TEST_PROGS = test-checker test-inline-checker-text-buffer \
-	test-text-iter test-utils
+UNIT_TEST_PROGS = test-checker test-entry \
+	test-inline-checker-text-buffer test-text-iter test-utils
 test_checker_SOURCES = test-checker.c
+test_entry_SOURCES = test-entry.c
 test_inline_checker_text_buffer_SOURCES = test-inline-checker-text-buffer.c
 test_text_iter_SOURCES = test-text-iter.c
 test_utils_SOURCES = test-utils.c
 @INSTALLED_TESTS_TRUE@insttestdir = $(libexecdir)/installed-tests/$(PACKAGE)-@GSPELL_API_VERSION@
 @INSTALLED_TESTS_TRUE@test_files = $(UNIT_TEST_PROGS:=.test)
-@INSTALLED_TESTS_TRUE@DISTCLEANFILES = $(test_files)
+@INSTALLED_TESTS_TRUE@CLEANFILES = $(test_files)
 @INSTALLED_TESTS_TRUE@testmetadir = $(datadir)/installed-tests/$(PACKAGE)-@GSPELL_API_VERSION@
 @INSTALLED_TESTS_TRUE@testmeta_DATA = $(test_files)
 all: all-am
@@ -745,6 +756,10 @@ test-checker$(EXEEXT): $(test_checker_OBJECTS) $(test_checker_DEPENDENCIES) $(EX
 	@rm -f test-checker$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_checker_OBJECTS) $(test_checker_LDADD) $(LIBS)
 
+test-entry$(EXEEXT): $(test_entry_OBJECTS) $(test_entry_DEPENDENCIES) $(EXTRA_test_entry_DEPENDENCIES) 
+	@rm -f test-entry$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_entry_OBJECTS) $(test_entry_LDADD) $(LIBS)
+
 test-inline-checker-text-buffer$(EXEEXT): $(test_inline_checker_text_buffer_OBJECTS) $(test_inline_checker_text_buffer_DEPENDENCIES) $(EXTRA_test_inline_checker_text_buffer_DEPENDENCIES) 
 	@rm -f test-inline-checker-text-buffer$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_inline_checker_text_buffer_OBJECTS) $(test_inline_checker_text_buffer_LDADD) $(LIBS)
@@ -764,6 +779,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-checker.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-entry.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-inline-checker-text-buffer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-text-iter.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-utils.Po@am__quote@
@@ -815,6 +831,11 @@ uninstall-testmetaDATA:
 	@list='$(testmeta_DATA)'; test -n "$(testmetadir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(testmetadir)'; $(am__uninstall_files_from_dir)
+check-valgrind-local: 
+check-valgrind-memcheck-local: 
+check-valgrind-helgrind-local: 
+check-valgrind-drd-local: 
+check-valgrind-sgcheck-local: 
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -1016,6 +1037,13 @@ test-checker.log: test-checker$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-entry.log: test-entry$(EXEEXT)
+	@p='test-entry$(EXEEXT)'; \
+	b='test-entry'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 test-inline-checker-text-buffer.log: test-inline-checker-text-buffer$(EXEEXT)
 	@p='test-inline-checker-text-buffer$(EXEEXT)'; \
 	b='test-inline-checker-text-buffer'; \
@@ -1115,15 +1143,35 @@ mostlyclean-generic:
 	-test -z "$(TEST_SUITE_LOG)" || rm -f $(TEST_SUITE_LOG)
 
 clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
-	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+check-valgrind: check-valgrind-am
+
+check-valgrind-am: check-valgrind-local
+
+check-valgrind-drd: check-valgrind-drd-am
+
+check-valgrind-drd-am: check-valgrind-drd-local
+
+check-valgrind-helgrind: check-valgrind-helgrind-am
+
+check-valgrind-helgrind-am: check-valgrind-helgrind-local
+
+check-valgrind-memcheck: check-valgrind-memcheck-am
+
+check-valgrind-memcheck-am: check-valgrind-memcheck-local
+
+check-valgrind-sgcheck: check-valgrind-sgcheck-am
+
+check-valgrind-sgcheck-am: check-valgrind-sgcheck-local
+
 clean: clean-am
 
 clean-am: clean-generic clean-insttestPROGRAMS clean-libtool \
@@ -1197,7 +1245,12 @@ uninstall-am: uninstall-insttestPROGRAMS uninstall-testmetaDATA
 
 .MAKE: check-am install-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am check check-TESTS check-am clean \
+.PHONY: CTAGS GTAGS TAGS all all-am check check-TESTS check-am \
+	check-valgrind-am check-valgrind-drd-am \
+	check-valgrind-drd-local check-valgrind-helgrind-am \
+	check-valgrind-helgrind-local check-valgrind-local \
+	check-valgrind-memcheck-am check-valgrind-memcheck-local \
+	check-valgrind-sgcheck-am check-valgrind-sgcheck-local clean \
 	clean-generic clean-insttestPROGRAMS clean-libtool \
 	clean-noinstPROGRAMS cscopelist-am ctags ctags-am distclean \
 	distclean-compile distclean-generic distclean-libtool \

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GspellNavigatorTextView: gspell 1 Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="gspell 1 Reference Manual">
-<link rel="up" href="ch04.html" title="GtkTextView Support">
+<link rel="up" href="GtkTextView-support.html" title="GtkTextView Support">
 <link rel="prev" href="GspellTextView.html" title="GspellTextView">
-<link rel="next" href="object-tree.html" title="Object Hierarchy">
-<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
+<link rel="next" href="GtkEntry-support.html" title="GtkEntry Support">
+<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -21,9 +21,9 @@
                   <a href="#GspellNavigatorTextView.properties" class="shortcut">Properties</a></span>
 </td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
-<td><a accesskey="u" href="ch04.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="GtkTextView-support.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
 <td><a accesskey="p" href="GspellTextView.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
-<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="GtkEntry-support.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry">
 <a name="GspellNavigatorTextView"></a><div class="titlepage"></div>
@@ -52,7 +52,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="returnvalue">GtkTextView</span></a> *
+<a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="returnvalue">GtkTextView</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="GspellNavigatorTextView.html#gspell-navigator-text-view-get-view" title="gspell_navigator_text_view_get_view ()">gspell_navigator_text_view_get_view</a> <span class="c_punctuation">()</span>
@@ -71,7 +71,7 @@
 </colgroup>
 <tbody><tr>
 <td class="property_type">
-<a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> *</td>
+<a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> *</td>
 <td class="property_name"><a class="link" href="GspellNavigatorTextView.html#GspellNavigatorTextView--view" title="The “view” property">view</a></td>
 <td class="property_flags">Read / Write / Construct Only</td>
 </tr></tbody>
@@ -92,8 +92,8 @@
 </div>
 <div class="refsect1">
 <a name="GspellNavigatorTextView.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
-    <span class="lineart">╰──</span> <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GInitiallyUnowned">GInitiallyUnowned</a>
+<pre class="screen">    <a href="/home/seb/jhbuild/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
+    <span class="lineart">╰──</span> <a href="/home/seb/jhbuild/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GInitiallyUnowned">GInitiallyUnowned</a>
         <span class="lineart">╰──</span> GspellNavigatorTextView
 </pre>
 </div>
@@ -111,8 +111,8 @@ GspellNavigatorTextView implements
 <div class="refsect1">
 <a name="GspellNavigatorTextView.description"></a><h2>Description</h2>
 <p><a class="link" href="GspellNavigatorTextView.html" title="GspellNavigatorTextView"><span class="type">GspellNavigatorTextView</span></a> is a simple implementation of the
-<a class="link" href="GspellNavigator.html" title="GspellNavigator"><span class="type">GspellNavigator</span></a> interface for the <a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> widget.</p>
-<p>If a selection exists in the <a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>, only the selected text is spell
+<a class="link" href="GspellNavigator.html" title="GspellNavigator"><span class="type">GspellNavigator</span></a> interface for the <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> widget.</p>
+<p>If a selection exists in the <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>, only the selected text is spell
 checked. Otherwise the whole buffer is checked.</p>
 <p>If only the selected text is spell checked, the implementation of
 <a class="link" href="GspellNavigator.html#gspell-navigator-change-all" title="gspell_navigator_change_all ()"><code class="function">gspell_navigator_change_all()</code></a> changes only the occurrences that were
@@ -120,14 +120,14 @@ present in the selection.</p>
 <p>The implementation of <a class="link" href="GspellNavigator.html#gspell-navigator-goto-next" title="gspell_navigator_goto_next ()"><code class="function">gspell_navigator_goto_next()</code></a> selects the
 misspelled word and scrolls to it.</p>
 <p>You need to call <a class="link" href="GspellTextBuffer.html#gspell-text-buffer-set-spell-checker" title="gspell_text_buffer_set_spell_checker ()"><code class="function">gspell_text_buffer_set_spell_checker()</code></a> to associate a
-<a class="link" href="GspellChecker.html" title="GspellChecker"><span class="type">GspellChecker</span></a> to the <a href="http://developer.gnome.org/gtk4/GtkTextBuffer.html#GtkTextBuffer-struct"><span class="type">GtkTextBuffer</span></a>.</p>
+<a class="link" href="GspellChecker.html" title="GspellChecker"><span class="type">GspellChecker</span></a> to the <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextBuffer.html#GtkTextBuffer-struct"><span class="type">GtkTextBuffer</span></a>.</p>
 </div>
 <div class="refsect1">
 <a name="GspellNavigatorTextView.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
 <a name="gspell-navigator-text-view-new"></a><h3>gspell_navigator_text_view_new ()</h3>
 <pre class="programlisting"><a class="link" href="GspellNavigator.html" title="GspellNavigator"><span class="returnvalue">GspellNavigator</span></a> *
-gspell_navigator_text_view_new (<em class="parameter"><code><a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> *view</code></em>);</pre>
+gspell_navigator_text_view_new (<em class="parameter"><code><a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> *view</code></em>);</pre>
 <div class="refsect3">
 <a name="gspell-navigator-text-view-new.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -138,21 +138,21 @@ gspell_navigator_text_view_new (<em class="parameter"><code><a href="http://deve
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>view</p></td>
-<td class="parameter_description"><p>a <a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>.</p></td>
+<td class="parameter_description"><p>a <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>.</p></td>
 <td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="gspell-navigator-text-view-new.returns"></a><h4>Returns</h4>
-<p> a new <a class="link" href="GspellNavigatorTextView.html" title="GspellNavigatorTextView"><span class="type">GspellNavigatorTextView</span></a> floating object. </p>
+<p>a new <a class="link" href="GspellNavigatorTextView.html" title="GspellNavigatorTextView"><span class="type">GspellNavigatorTextView</span></a> floating object. </p>
 <p><span class="annotation">[<acronym title="Alias for transfer none, used for objects with floating refs."><span class="acronym">transfer floating</span></acronym>]</span></p>
 </div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="gspell-navigator-text-view-get-view"></a><h3>gspell_navigator_text_view_get_view ()</h3>
-<pre class="programlisting"><a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="returnvalue">GtkTextView</span></a> *
+<pre class="programlisting"><a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="returnvalue">GtkTextView</span></a> *
 gspell_navigator_text_view_get_view (<em class="parameter"><code><a class="link" href="GspellNavigatorTextView.html" title="GspellNavigatorTextView"><span class="type">GspellNavigatorTextView</span></a> *navigator</code></em>);</pre>
 <div class="refsect3">
 <a name="gspell-navigator-text-view-get-view.parameters"></a><h4>Parameters</h4>
@@ -171,7 +171,7 @@ gspell_navigator_text_view_get_view (<em class="parameter"><code><a class="link"
 </div>
 <div class="refsect3">
 <a name="gspell-navigator-text-view-get-view.returns"></a><h4>Returns</h4>
-<p> the <a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>. </p>
+<p>the <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 </div>
@@ -187,8 +187,8 @@ gspell_navigator_text_view_get_view (<em class="parameter"><code><a class="link"
 <a name="GspellNavigatorTextView.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
 <a name="GspellNavigatorTextView--view"></a><h3>The <code class="literal">“view”</code> property</h3>
-<pre class="programlisting">  “view”                     <a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> *</pre>
-<p>The <a href="http://developer.gnome.org/gtk4/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>. The buffer is not sufficient, the view is needed to
+<pre class="programlisting">  “view”                     <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a> *</pre>
+<p>The <a href="/home/seb/jhbuild/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct"><span class="type">GtkTextView</span></a>. The buffer is not sufficient, the view is needed to
 scroll to the misspelled words.</p>
 <p>Flags: Read / Write / Construct Only</p>
 </div>
@@ -199,6 +199,6 @@ scroll to the misspelled words.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25.1</div>
+<hr>Generated by GTK-Doc V1.26.1</div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 gspell_checker_dialog_get_type
 gspell_checker_error_get_type
 gspell_checker_get_type
+gspell_entry_buffer_get_type
+gspell_entry_get_type
 gspell_language_chooser_button_get_type
 gspell_language_chooser_dialog_get_type
 gspell_language_chooser_get_type

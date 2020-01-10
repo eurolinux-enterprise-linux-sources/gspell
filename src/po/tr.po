@@ -10,15 +10,16 @@
 # sabri ünal <yakushabb@gmail.com>, 2014.
 # Necdet Yücel <necdetyucel@gmail.com>, 2015.
 # Muhammet Kara <muhammetk@gmail.com>, 2011, 2012, 2013, 2014, 2015.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gspell\n"
 "Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=gspell\n"
-"POT-Creation-Date: 2017-02-24 13:21+0100\n"
-"PO-Revision-Date: 2015-09-17 20:57+0300\n"
-"Last-Translator: Muhammet Kara <muhammetk@gmail.com>\n"
+"POT-Creation-Date: 2017-10-29 09:50+0100\n"
+"PO-Revision-Date: 2017-09-06 09:51+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -28,30 +29,29 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 "X-POOTLE-MTIME: 1433962102.000000\n"
 
-#: gspell/gspell-checker.c:407
+#: gspell/gspell-checker.c:419
 #, c-format
 msgid "Error when checking the spelling of word “%s”: %s"
-msgstr "“%s” kelimesinin yazım denetimi yapılırken hata: %s"
+msgstr "“%s” sözcüğünün yazım denetimi yapılırken hata: %s"
 
 #. Translators: Displayed in the "Check Spelling"
 #. * dialog if there are no suggestions for the current
 #. * misspelled word.
 #.
 #. No suggestions. Put something in the menu anyway...
-#: gspell/gspell-checker-dialog.c:147
-#: gspell/gspell-inline-checker-text-buffer.c:841
+#: gspell/gspell-checker-dialog.c:150 gspell/gspell-context-menu.c:217
 msgid "(no suggested words)"
-msgstr "(kelime önerisi yok)"
+msgstr "(sözcük önerisi yok)"
 
-#: gspell/gspell-checker-dialog.c:232
+#: gspell/gspell-checker-dialog.c:235
 msgid "Error:"
 msgstr "Hata:"
 
-#: gspell/gspell-checker-dialog.c:268
+#: gspell/gspell-checker-dialog.c:271
 msgid "Completed spell checking"
 msgstr "Yazım denetimi tamamlandı"
 
-#: gspell/gspell-checker-dialog.c:272
+#: gspell/gspell-checker-dialog.c:275
 msgid "No misspelled words"
 msgstr "Hatalı yazılmış sözcük yok"
 
@@ -59,35 +59,38 @@ msgstr "Hatalı yazılmış sözcük yok"
 #. * Spelling" dialog if the current word
 #. * isn't misspelled.
 #.
-#: gspell/gspell-checker-dialog.c:499
+#: gspell/gspell-checker-dialog.c:502
 msgid "(correct spelling)"
 msgstr "(imla hatalarını düzelt)"
 
-#: gspell/gspell-checker-dialog.c:637
+#: gspell/gspell-checker-dialog.c:644
 msgid "Suggestions"
 msgstr "Öneriler"
 
-#: gspell/gspell-inline-checker-text-buffer.c:864
-msgid "_More..."
-msgstr "_Daha fazla..."
+#: gspell/gspell-context-menu.c:152
+msgid "_Language"
+msgstr "_Dil"
+
+#: gspell/gspell-context-menu.c:240
+msgid "_More…"
+msgstr "_Daha çok…"
 
 #. Ignore all
-#: gspell/gspell-inline-checker-text-buffer.c:904
+#: gspell/gspell-context-menu.c:285
 msgid "_Ignore All"
 msgstr "Hepsini _Yoksay"
 
 #. Add to Dictionary
-#: gspell/gspell-inline-checker-text-buffer.c:913
+#: gspell/gspell-context-menu.c:303
 msgid "_Add"
 msgstr "_Ekle"
 
-#. Prepend suggestions
-#: gspell/gspell-inline-checker-text-buffer.c:944
-msgid "_Spelling Suggestions..."
-msgstr "_Yazım Önerileri..."
+#: gspell/gspell-context-menu.c:340
+msgid "_Spelling Suggestions…"
+msgstr "_Yazım Önerileri…"
 
 #. Translators: %s is the language ISO code.
-#: gspell/gspell-language.c:253
+#: gspell/gspell-language.c:256
 #, c-format
 msgctxt "language"
 msgid "Unknown (%s)"
@@ -96,29 +99,25 @@ msgstr "Bilinmeyen (%s)"
 #. Translators: The first %s is the language name, and the
 #. * second is the country name. Example: "French (France)".
 #.
-#: gspell/gspell-language.c:270 gspell/gspell-language.c:279
+#: gspell/gspell-language.c:273 gspell/gspell-language.c:282
 #, c-format
 msgctxt "language"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: gspell/gspell-language-chooser-button.c:81
+#: gspell/gspell-language-chooser-button.c:84
 msgid "No language selected"
-msgstr ""
+msgstr "Dil seçilmedi"
 
-#: gspell/gspell-navigator-text-view.c:307
+#: gspell/gspell-navigator-text-view.c:310
 msgid ""
-"Spell checker error: no language set. It's maybe because no dictionaries are "
+"Spell checker error: no language set. It’s maybe because no dictionaries are "
 "installed."
 msgstr ""
+"Yazım denetçisi hatası: ayarlanan dil yok. Bunun nedeni belki de hiçbir "
+"sözlüğün kurulu olmamasıdır."
 
-#. Prepend language sub-menu
-#: gspell/gspell-text-view.c:273
-#, fuzzy
-msgid "_Language"
-msgstr "Dili Ayarla"
-
-#: gspell/resources/checker-dialog.ui:8
+#: gspell/resources/checker-dialog.ui:7
 msgid "Check Spelling"
 msgstr "Yazım Denetimi Yap"
 
@@ -128,7 +127,7 @@ msgstr "Hatalı yazılmış sözcük:"
 
 #: gspell/resources/checker-dialog.ui:49
 msgid "word"
-msgstr "kelime"
+msgstr "sözcük"
 
 #: gspell/resources/checker-dialog.ui:66
 msgid "Change _to:"
@@ -138,42 +137,41 @@ msgstr "Değiş_tir:"
 msgid "Check _Word"
 msgstr "Sözcük De_netle"
 
-#: gspell/resources/checker-dialog.ui:121
+#: gspell/resources/checker-dialog.ui:120
 msgid "_Suggestions:"
 msgstr "_Öneriler:"
 
-#: gspell/resources/checker-dialog.ui:134
+#: gspell/resources/checker-dialog.ui:133
 msgid "_Ignore"
 msgstr "_Yoksay"
 
-#: gspell/resources/checker-dialog.ui:148
+#: gspell/resources/checker-dialog.ui:146
 msgid "Ignore _All"
 msgstr "Tü_münü Yoksay"
 
-#: gspell/resources/checker-dialog.ui:162
+#: gspell/resources/checker-dialog.ui:159
 msgid "Cha_nge"
 msgstr "_Değiştir"
 
-#: gspell/resources/checker-dialog.ui:178
+#: gspell/resources/checker-dialog.ui:174
 msgid "Change A_ll"
 msgstr "_Tümünü Değiştir"
 
-#: gspell/resources/checker-dialog.ui:196
+#: gspell/resources/checker-dialog.ui:191
 msgid "User dictionary:"
 msgstr "Kullanıcı sözlüğü:"
 
-#: gspell/resources/checker-dialog.ui:208
+#: gspell/resources/checker-dialog.ui:203
 msgid "Add w_ord"
 msgstr "S_özcük ekle"
 
-#: gspell/resources/language-dialog.ui:8
+#: gspell/resources/language-dialog.ui:7
 msgid "Set Language"
 msgstr "Dili Ayarla"
 
 #: gspell/resources/language-dialog.ui:20
-#, fuzzy
 msgid "Select the spell checking _language."
-msgstr "Yazım denetimi tamamlandı"
+msgstr "Yazım denetimi _dilini seç."
 
 #: gspell/resources/language-dialog.ui:61
 msgid "_Cancel"
