@@ -1,0 +1,186 @@
+# Croatian translation for gtkspell
+# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# This file is distributed under the same license as the gtkspell package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gtkspell\n"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
+"product=gspell\n"
+"POT-Creation-Date: 2017-02-24 13:21+0100\n"
+"PO-Revision-Date: 2010-03-22 21:10+0000\n"
+"Last-Translator: Saša Teković <Unknown>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2016-09-15 11:39+0000\n"
+"X-Generator: Launchpad (build 18186)\n"
+
+#: gspell/gspell-checker.c:407
+#, c-format
+msgid "Error when checking the spelling of word “%s”: %s"
+msgstr ""
+
+#. Translators: Displayed in the "Check Spelling"
+#. * dialog if there are no suggestions for the current
+#. * misspelled word.
+#.
+#. No suggestions. Put something in the menu anyway...
+#: gspell/gspell-checker-dialog.c:147
+#: gspell/gspell-inline-checker-text-buffer.c:841
+#, fuzzy
+msgid "(no suggested words)"
+msgstr "<i>(nema sugestije)</i>"
+
+#: gspell/gspell-checker-dialog.c:232
+msgid "Error:"
+msgstr ""
+
+#: gspell/gspell-checker-dialog.c:268
+msgid "Completed spell checking"
+msgstr ""
+
+#: gspell/gspell-checker-dialog.c:272
+msgid "No misspelled words"
+msgstr ""
+
+#. Translators: Displayed in the "Check
+#. * Spelling" dialog if the current word
+#. * isn't misspelled.
+#.
+#: gspell/gspell-checker-dialog.c:499
+msgid "(correct spelling)"
+msgstr ""
+
+#: gspell/gspell-checker-dialog.c:637
+msgid "Suggestions"
+msgstr ""
+
+#: gspell/gspell-inline-checker-text-buffer.c:864
+#, fuzzy
+msgid "_More..."
+msgstr "Više..."
+
+#. Ignore all
+#: gspell/gspell-inline-checker-text-buffer.c:904
+#, fuzzy
+msgid "_Ignore All"
+msgstr "Zanemari sve"
+
+#. Add to Dictionary
+#: gspell/gspell-inline-checker-text-buffer.c:913
+msgid "_Add"
+msgstr ""
+
+#. Prepend suggestions
+#: gspell/gspell-inline-checker-text-buffer.c:944
+msgid "_Spelling Suggestions..."
+msgstr ""
+
+#. Translators: %s is the language ISO code.
+#: gspell/gspell-language.c:253
+#, c-format
+msgctxt "language"
+msgid "Unknown (%s)"
+msgstr ""
+
+#. Translators: The first %s is the language name, and the
+#. * second is the country name. Example: "French (France)".
+#.
+#: gspell/gspell-language.c:270 gspell/gspell-language.c:279
+#, c-format
+msgctxt "language"
+msgid "%s (%s)"
+msgstr ""
+
+#: gspell/gspell-language-chooser-button.c:81
+msgid "No language selected"
+msgstr ""
+
+#: gspell/gspell-navigator-text-view.c:307
+msgid ""
+"Spell checker error: no language set. It's maybe because no dictionaries are "
+"installed."
+msgstr ""
+
+#. Prepend language sub-menu
+#: gspell/gspell-text-view.c:273
+#, fuzzy
+msgid "_Language"
+msgstr "Jezici"
+
+#: gspell/resources/checker-dialog.ui:8
+msgid "Check Spelling"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:36
+msgid "Misspelled word:"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:49
+msgid "word"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:66
+msgid "Change _to:"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:91
+msgid "Check _Word"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:121
+msgid "_Suggestions:"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:134
+#, fuzzy
+msgid "_Ignore"
+msgstr "Zanemari sve"
+
+#: gspell/resources/checker-dialog.ui:148
+#, fuzzy
+msgid "Ignore _All"
+msgstr "Zanemari sve"
+
+#: gspell/resources/checker-dialog.ui:162
+msgid "Cha_nge"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:178
+msgid "Change A_ll"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:196
+msgid "User dictionary:"
+msgstr ""
+
+#: gspell/resources/checker-dialog.ui:208
+msgid "Add w_ord"
+msgstr ""
+
+#: gspell/resources/language-dialog.ui:8
+#, fuzzy
+msgid "Set Language"
+msgstr "Jezici"
+
+#: gspell/resources/language-dialog.ui:20
+msgid "Select the spell checking _language."
+msgstr ""
+
+#: gspell/resources/language-dialog.ui:61
+msgid "_Cancel"
+msgstr ""
+
+#: gspell/resources/language-dialog.ui:68
+msgid "_Select"
+msgstr ""
+
+#~ msgid "Add \"%s\" to Dictionary"
+#~ msgstr "Dodaj \"%s\" u Rječnik"
+
+#~ msgid "enchant error for language: %s"
+#~ msgstr "začarana greška za jezik: %s"
